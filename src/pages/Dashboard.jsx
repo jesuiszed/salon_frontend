@@ -3,6 +3,7 @@ import api from '../services/api';
 import { FaHome, FaCalendarCheck, FaEuroSign, FaExclamationTriangle, FaUsers } from 'react-icons/fa';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title } from 'chart.js';
 import { Pie, Bar } from 'react-chartjs-2';
+import './Dashboard.css';
 
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement, Title);
 
@@ -78,65 +79,65 @@ const Dashboard = () => {
         </h1>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px', marginBottom: '30px' }}>
-        <div className="card" style={{ background: 'linear-gradient(135deg, #FFB6C1 0%, #FF69B4 100%)', color: 'white' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <div>
-              <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>Rendez-vous du jour</div>
-              <div style={{ fontSize: '2.5rem', fontWeight: 'bold', marginTop: '10px' }}>{stats.today_appointments}</div>
+      <div className="stats-grid">
+        <div className="stat-card" style={{ background: 'linear-gradient(135deg, #FFB6C1 0%, #FF69B4 100%)' }}>
+          <div className="stat-card-content">
+            <div className="stat-info">
+              <div className="stat-label">Rendez-vous du jour</div>
+              <div className="stat-value">{stats.today_appointments}</div>
             </div>
-            <FaCalendarCheck style={{ fontSize: '3rem', opacity: 0.5 }} />
+            <FaCalendarCheck className="stat-icon" />
           </div>
         </div>
 
-        <div className="card" style={{ background: 'linear-gradient(135deg, #DDA0DD 0%, #DA70D6 100%)', color: 'white' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <div>
-              <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>Revenus du jour</div>
-              <div style={{ fontSize: '2.5rem', fontWeight: 'bold', marginTop: '10px' }}>{stats.today_revenue.toFixed(2)}€</div>
+        <div className="stat-card" style={{ background: 'linear-gradient(135deg, #DDA0DD 0%, #DA70D6 100%)' }}>
+          <div className="stat-card-content">
+            <div className="stat-info">
+              <div className="stat-label">Revenus du jour</div>
+              <div className="stat-value">{stats.today_revenue.toFixed(2)}€</div>
             </div>
-            <FaEuroSign style={{ fontSize: '3rem', opacity: 0.5 }} />
+            <FaEuroSign className="stat-icon" />
           </div>
         </div>
 
-        <div className="card" style={{ background: stats.low_stock_count > 0 ? 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)' : 'linear-gradient(135deg, #90EE90 0%, #32CD32 100%)', color: 'white' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <div>
-              <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>Alertes stock bas</div>
-              <div style={{ fontSize: '2.5rem', fontWeight: 'bold', marginTop: '10px' }}>{stats.low_stock_count}</div>
+        <div className="stat-card" style={{ background: stats.low_stock_count > 0 ? 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)' : 'linear-gradient(135deg, #90EE90 0%, #32CD32 100%)' }}>
+          <div className="stat-card-content">
+            <div className="stat-info">
+              <div className="stat-label">Alertes stock bas</div>
+              <div className="stat-value">{stats.low_stock_count}</div>
             </div>
-            <FaExclamationTriangle style={{ fontSize: '3rem', opacity: 0.5 }} />
+            <FaExclamationTriangle className="stat-icon" />
           </div>
         </div>
 
-        <div className="card" style={{ background: 'linear-gradient(135deg, #87CEEB 0%, #4682B4 100%)', color: 'white' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-            <div>
-              <div style={{ fontSize: '0.9rem', opacity: 0.9 }}>Total Clients</div>
-              <div style={{ fontSize: '2.5rem', fontWeight: 'bold', marginTop: '10px' }}>{stats.total_clients}</div>
+        <div className="stat-card" style={{ background: 'linear-gradient(135deg, #87CEEB 0%, #4682B4 100%)' }}>
+          <div className="stat-card-content">
+            <div className="stat-info">
+              <div className="stat-label">Total Clients</div>
+              <div className="stat-value">{stats.total_clients}</div>
             </div>
-            <FaUsers style={{ fontSize: '3rem', opacity: 0.5 }} />
+            <FaUsers className="stat-icon" />
           </div>
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '20px' }}>
-        <div className="card">
-          <h3 style={{ color: 'var(--primary-purple)', marginBottom: '20px' }}>Activité du jour</h3>
-          <div style={{ height: '300px' }}>
+      <div className="charts-container">
+        <div className="chart-card">
+          <h3 className="chart-title">Activité du jour</h3>
+          <div className="chart-wrapper">
             <Pie data={pieData} options={chartOptions} />
           </div>
         </div>
 
-        <div className="card">
-          <h3 style={{ color: 'var(--primary-purple)', marginBottom: '20px' }}>Revenus du jour</h3>
-          <div style={{ height: '300px' }}>
+        <div className="chart-card">
+          <h3 className="chart-title">Revenus du jour</h3>
+          <div className="chart-wrapper">
             <Bar data={barData} options={chartOptions} />
           </div>
         </div>
       </div>
 
-      <div className="card" style={{ marginTop: '20px' }}>
+      <div className="card">
         <h3 style={{ color: 'var(--primary-purple)', marginBottom: '15px' }}>Bienvenue sur votre espace de gestion</h3>
         <p style={{ color: 'var(--text-light)', lineHeight: '1.8' }}>
           Utilisez le menu latéral pour naviguer entre les différentes sections de l'application. 

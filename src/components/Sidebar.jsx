@@ -8,7 +8,7 @@ import {
 } from 'react-icons/fa';
 import './Sidebar.css';
 
-const Sidebar = () => {
+const Sidebar = ({ isOpen, onClose }) => {
   const { user, logout, isPatronne } = useAuth();
 
   const menuItems = [
@@ -26,8 +26,14 @@ const Sidebar = () => {
     );
   }
 
+  const handleNavClick = () => {
+    if (window.innerWidth <= 768 && onClose) {
+      onClose();
+    }
+  };
+
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${isOpen ? 'open' : ''}`}>
       <div className="sidebar-header">
         <FaHeart className="logo-icon" />
         <h2 className="sidebar-title">Salon Coiffure</h2>
@@ -49,6 +55,7 @@ const Sidebar = () => {
             key={item.path}
             to={item.path}
             className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
+            onClick={handleNavClick}
           >
             <span className="nav-icon">{item.icon}</span>
             <span className="nav-label">{item.label}</span>

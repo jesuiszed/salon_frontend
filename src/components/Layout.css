@@ -1,6 +1,7 @@
 .layout {
   display: flex;
   min-height: 100vh;
+  position: relative;
 }
 
 .main-content {
@@ -8,11 +9,53 @@
   padding: 30px;
   margin-left: 280px;
   animation: fadeIn 0.5s ease;
+  transition: margin-left 0.3s ease;
+}
+
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 200;
+  background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-purple) 100%);
+  color: white;
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 4px 15px var(--shadow);
+  transition: transform 0.3s ease;
+}
+
+.menu-toggle:hover {
+  transform: scale(1.1);
+}
+
+@media (max-width: 1024px) {
+  .main-content {
+    padding: 20px;
+    margin-left: 80px;
+  }
 }
 
 @media (max-width: 768px) {
   .main-content {
     margin-left: 0;
-    padding: 20px;
+    padding: 70px 15px 15px;
+  }
+
+  .menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: 65px 10px 10px;
   }
 }
